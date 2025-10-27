@@ -1,0 +1,65 @@
+import React from 'react';
+
+const BookCard = ({ title, author, price, originalPrice, genre, isAvailable, isBestseller }) => {
+  return (
+    <div className="book-card">
+      {/* BESTSELLER badge */}
+      {isBestseller && <span className="badge">BESTSELLER</span>}
+
+      {/* Title */}
+      <h3>{title}</h3>
+
+      {/* Author */}
+      <p>Author: {author}</p>
+
+      {/* Genre */}
+      <p>Genre: {genre}</p>
+
+      {/* Price section */}
+      <div className="price-section">
+        <p>Price: ${price.toFixed(2)}</p>
+        {isBestseller && originalPrice > price && (
+          <p className="original-price">${originalPrice.toFixed(2)}</p>
+        )}
+      </div>
+
+      {/* Availability */}
+      <p className={isAvailable ? 'in-stock' : 'out-of-stock'}>
+        {isAvailable ? 'Available' : 'Not Available'}
+      </p>
+    </div>
+  );
+};
+
+export default BookCard;
+
+
+
+
+///App.jsx 
+
+import React from 'react';
+import BookCard from './components/BookCard';
+
+function App() {
+  const books = [
+    { id: 1, title: 'The Alchemist', author: 'Paulo Coelho', price: 9.99, originalPrice: 14.99, genre: 'Fiction', isAvailable: true, isBestseller: true },
+    { id: 2, title: 'Clean Code', author: 'Robert C. Martin', price: 24.99, originalPrice: 24.99, genre: 'Programming', isAvailable: true, isBestseller: false },
+    { id: 3, title: 'Sapiens', author: 'Yuval Noah Harari', price: 19.99, originalPrice: 25.99, genre: 'History', isAvailable: false, isBestseller: true },
+    { id: 4, title: 'Atomic Habits', author: 'James Clear', price: 16.99, originalPrice: 16.99, genre: 'Self Help', isAvailable: true, isBestseller: false }
+  ];
+
+  return (
+    <div>
+      <h1>Book Showcase</h1>
+      <div className="book-grid">
+        {books.map(book => (
+          <BookCard key={book.id} {...book} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
