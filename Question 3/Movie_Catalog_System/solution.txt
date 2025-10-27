@@ -1,0 +1,17 @@
+import React from 'react';
+
+function MovieCard({ title, genre, rating, isAvailable, isTopRated }) {
+  return (
+    <div className="movie-card">
+      <h2>{title}</h2>
+      <p>Genre: {genre}</p>
+      <p>Rating: {rating}</p>
+      {isTopRated && <span className="top-rated-badge">TOP RATED</span>}
+      <p className={`availability-status ${isAvailable ? 'available' : 'not-available'}`}>
+        {isAvailable ? 'Available' : 'Not Available'}
+      </p>
+    </div>
+  );
+}
+
+export default MovieCard;
